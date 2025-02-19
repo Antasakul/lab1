@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link href="../styles/contact.css" rel="stylesheet"> 
+    <style>
+        @font-face {
+            font-family: 'Inter-Medium';
+            src: url('assets/fonts/Inter-Medium.otf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Inter-SemiBold';
+            src: url('assets/fonts/Inter-SemiBold.otf') format('truetype');
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="../assets/images/Logo.svg" alt="Логотип" class="log">
+        <nav class="nav-desktop">
+             <a href="../index.html">Главная</a>
+             <a href="adout.html">О нас</a>
+             <a href="blog.html">Блог</a>
+             <a href="pricing.html">Стоимость</a>
+             <a href="contact.html">Контакты</a>
+         </nav>
+         
+         <!-- Бургер-меню -->
+         <div class="hamburger-menu">
+             <input id="menu__toggle" type="checkbox"/>
+             <label class="menu__btn" for="menu__toggle">
+                 <span></span>
+             </label>
+     
+             <ul class="menu__box">
+                 <li><a class="menu__item" href="../index.html">Главная</a></li>
+                 <li><a class="menu__item" href="adout.html">О нас</a></li>
+                 <li><a class="menu__item" href="blog.html">Блог</a></li>
+                 <li><a class="menu__item" href="pricing.html">Стоимость</a></li>
+                 <li><a class="menu__item" href="contact.html">Контакты</a></li>
+             </ul>
+         </div>
+     </header>
+
+<section class="text" style="background-color: white;">
+    <h1>Свяжитесь с нашей командой чтобы узнать больше</h1>
+</section>
+
+<section class="container">
+    <div class="map-container">
+        <img src="../assets/images/map.png" alt="Карта" style="width: 100%;">
+    </div>
+
+    <div class="info-container">
+        <h2>Поддержка</h2>
+        <p>Наша дружелюбная команда поможет вам</p>
+        <h3>support@sars.com</h3>
+
+        <h2>Отдел продаж</h2>
+        <p>Вопросы или пожелания? Свяжитесь с нами!</p>
+        <h3>sales@sars.com</h3>
+
+        <h2>Телефон</h2>
+        <p>Наша дружелюбная команда поможет вам</p>
+        <h3>+373 (44) 560-88-55</h3>
+    </div>
+</section>
+
+<section class="form-section">
+    <div class="form-container">
+        <h2>Повышайте уровень своего бренда</h2>
+        <p>Вы можете связаться с нами в любое время <br> 
+            <a href="mailto:hellosansbrothers@gmail.com">hellosansbrothers@gmail.com</a>
+        </p>
+        <form class="registration-form">
+            
+                <div class="input-wrapper">
+                    <label for="first-name">Имя</label>
+                    <input type="text" id="first-name" placeholder="Имя" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="last-name">Фамилия</label>
+                    <input type="text" id="last-name" placeholder="Фамилия" required>
+                </div>
+            
+            <div class="input-wrapper">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="you@company.com" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" placeholder="+375 (555) 000-0000" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="tariff">Выберите тариф</label>
+                <select id="tariff">
+                    <option>Стартовый</option>
+                    <option>Популяный</option>
+                    <option>Предприятие</option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" placeholder="Оставьте комментарий к заявке"></textarea>
+            </div>
+            <button type="submit">Начать</button>
+        </form>
+    </div>
+    <div class="form-image">
+        <img src="../assets/images/blog-form.jpg" alt="Фоновое изображение">
+    </div>
+</section>
+
+<footer>
+
+    <div class="footer-container">
+        <div class="footer-content">
+            <h1>Технологии, которые растят ваш бизнес</h1>
+            <p>Узнайте больше о наших решениях, ценах, внедрении и многом другом. Наши опытные специалисты всегда готовы помочь.</p>
+        </div>
+        <div class="footer-links">
+            <div class="logo">
+                <img src="../assets/images/logobel.png" alt="Логотип" class="logo">
+            </div>
+            <nav>
+                <a href="../index.html">Главная</a>
+                <a href="adout.html">О нас</a>
+                <a href="blog.html">Блог</a>
+                <a href="pricing.html">Стоимость</a>
+                <a href="contact.html">Контакты</a>
+            </nav>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© Copyright 2023 All Rights Reserved</p>
+    </div>
+</footer>
+
+</body>
+</html>

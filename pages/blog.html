@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас</title>
+    <link href="../styles/blog.css" rel="stylesheet"> 
+</head>
+
+
+<body>
+
+    <header>
+        <img src="../assets/images/Logo.svg" alt="Логотип" class="log">
+        <nav class="nav-desktop">
+             <a href="../index.html">Главная</a>
+             <a href="adout.html">О нас</a>
+             <a href="blog.html">Блог</a>
+             <a href="pricing.html">Стоимость</a>
+             <a href="contact.html">Контакты</a>
+         </nav>
+         
+         <!-- Бургер-меню -->
+         <div class="hamburger-menu">
+             <input id="menu__toggle" type="checkbox"/>
+             <label class="menu__btn" for="menu__toggle">
+                 <span></span>
+             </label>
+     
+             <ul class="menu__box">
+                 <li><a class="menu__item" href="../index.html">Главная</a></li>
+                 <li><a class="menu__item" href="adout.html">О нас</a></li>
+                 <li><a class="menu__item" href="blog.html">Блог</a></li>
+                 <li><a class="menu__item" href="pricing.html">Стоимость</a></li>
+                 <li><a class="menu__item" href="contact.html">Контакты</a></li>
+             </ul>
+         </div>
+     </header>
+
+<section class="hero">
+    <h1>Активность и обновление</h1>
+    <p>Наша главная задача — постоянно разрабатывать и создавать продукты, которые помогут вам лучше вести бизнес.</p>
+</section>
+
+<section class="image-section">
+    <div class="image-item">
+        <img src="../assets/images/blog2.png" alt="Практика создания User Flow">
+    </div>
+    <div class="image-item">
+        <img src="../assets/images/blog1.png" alt="Обзор принципов дизайна">
+    </div>
+</section>
+
+<section class="text-section">
+    <div class="text-item">
+        <h2>Практика создания User Flow</h2>
+        <p>Наши специалисты помогут разобраться, что это такое и как его использовать.</p>
+    </div>
+    <div class="text-item">
+        <h2>Обзор принципов дизайна</h2>
+        <p>Что такое принципы дизайна? Разберемся вместе и поможем применить на практике.</p>
+    </div>
+</section>
+
+<section class="hero2">
+    <h1>Как мы выполняем задачи с помощью сервисов AWS</h1>
+   </section>
+
+<section class="review-section">
+    <div class="profile">
+        <img src="../assets/images/blog3.jpeg" alt="Рик Уэллс" class="profile-img">
+        <span class="profile-name">Рик Уэллс</span>
+    </div>
+    <img src="../assets/images/blog4.png" alt="Второе фото" class="review-image">
+    <p class="review-text">В зависимости от входных данных выполнение задачи может требовать значительных вычислительных ресурсов и времени. Например, обработка одного элемента – контакта из адресной книги – может занимать до 5 секунд. Со временем появилась новая потребность: система должна поддерживать компании, которые управляют контактами в виде файлов.</p>
+    <p class="review-text">Мы решили разработать веб-приложение, которое позволяет загружать файлы с данными, например, в формате CSV. Также появилась необходимость в интеграции с внешними сервисами, такими как ESP/CRM (например, Mailchimp). Пользователю не нужно получать результат мгновенно – система может уведомлять его по завершении обработки.</p>
+    <p class="review-text">Эта особенность стала ключевой при выборе архитектурного решения. Вот как мы это реализовали с помощью AWS.</p>
+</section>
+<section class="dark-block">
+    <h2>Первоначальный подход</h2>
+    <p>Сначала мы разработали веб-приложение, которое считывало .csv файл построчно и отправляло массив записей в backend через REST API. Обработка данных происходила в реальном времени: как только пользователь запускал процесс, он ожидал мгновенный результат.</p>
+    <p>Другой вариант – вертикальное масштабирование AWS-архитектуры. Мы использовали более мощные и дорогие серверы с увеличенным объемом RAM и процессорными ресурсами. Этот подход хорошо работал для небольших наборов данных (до 5000 записей), но с увеличением объема возникли серьезные проблемы.</p>
+    <p>Во-первых, продолжительные запросы могли привести к сбоям. Во-вторых, сторонние сервисы (ESP/CRM) не всегда оптимизированы для больших нагрузок или не поддерживают пакетную обработку. Кроме того, они ограничивают объем запросов, чтобы избежать чрезмерных затрат на своей стороне.</p>
+    <p>Так как обработка выполнялась в реальном времени, запрос мог "зависнуть" на длительное время, пока backend выполнял всю работу и отправлял результат пользователю. AWS ограничивал выполнение запроса 300 секундами (на момент написания статьи), после чего процесс прерывался.</p>
+    <p>Еще один серьезный недостаток – пользователь был вынужден ждать несколько минут для получения результата и не мог пользоваться приложением во время обработки. Это негативно сказывалось на пользовательском опыте.</p>
+    <p>Поэтому мы решили изменить подход. Вот что мы сделали.</p>
+
+     <div class="author-block">
+        <img src="../assets/images/blog5.webp" alt="Рита Уэллс" class="author-photo1">
+        <div class="author-info">
+            <h2>Рита Уэллс</h2>
+            <div class="author-role"> <h2>Дизайнер</h2> </div>
+            <p>
+                Обладает навыками работы с React Native, iOS и backend. Тони обладает обширными знаниями в области информационных технологий и услуг, 
+                а также большим практическим опытом, подтверждающим это.
+            </p>
+        </div>
+    </div> 
+</section>
+<footer>
+
+    <div class="footer-container">
+        <div class="footer-content">
+            <h1>Технологии, которые растят ваш бизнес</h1>
+            <p>Узнайте больше о наших решениях, ценах, внедрении и многом другом. Наши опытные специалисты всегда готовы помочь.</p>
+        </div>
+        <div class="footer-links">
+            <div class="logo">
+                <img src="../assets/images/logobel.png" alt="Логотип" class="logo">
+            </div>
+            <nav>
+                <a href="../index.html">Главная</a>
+                <a href="adout.html">О нас</a>
+                <a href="blog.html">Блог</a>
+                <a href="pricing.html">Стоимость</a>
+                <a href="contact.html">Контакты</a>
+            </nav>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© Copyright 2023 All Rights Reserved</p>
+    </div>
+</footer>
+
+</body>
+</html>
