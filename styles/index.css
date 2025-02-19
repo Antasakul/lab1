@@ -548,11 +548,13 @@ header {
 
 }
 
-.info h1 {
+.info h2 {
     margin: 0px;
     letter-spacing: -2px;
     font-size: 56px;
 }
+
+
 
 .info p {
     max-width: 551px;
@@ -596,7 +598,7 @@ header {
         padding: 0;
     }
 
-    .info h1 {
+    .info h2 {
         padding: 0;
         margin: 0;
         letter-spacing: 0px;
@@ -746,7 +748,7 @@ footer {
 
 }
 
-.footer-content h1 {
+.footer-content h2 {
     margin: 0;
     padding-bottom: 50px;
     font-size: 48px;
@@ -840,7 +842,7 @@ footer {
 
     }
 
-    .footer-content h1 {
+    .footer-content h2 {
         margin: 0;
         padding-bottom: 8px;
         font-size: 24px;
