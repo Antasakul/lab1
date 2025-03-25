@@ -556,7 +556,10 @@ input[type="checkbox"]:checked+.question+.answer {
 @media (max-width: 376px) {
 
     .quate {
-        padding: 0;
+        padding-top: 30px;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
         margin: 0;
         background-color: white;
         text-align: center;
@@ -798,4 +801,302 @@ footer {
         /* 142.857% */
     }
 
+}
+
+.calcul{
+    font-family: Arial, sans-serif;
+    margin: 0px;
+    padding: 30px 190px 30px 190px;
+       background-color: #1e1e2f;
+}
+.calcul h2{
+text-align: center;
+font-size: 72px;
+color: white;
+margin: 0;
+}
+.calcul p{
+    padding-bottom: 20px;
+text-align: center;
+font-size: 46px;
+color: white;
+margin: 0;
+}
+.item {
+font-size: 24px;
+  max-width: 40rem;
+    background: #1e1e2f;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+.item.selected {
+    background: white; /* Цвет для выбранных элементов */
+    color: black; /* Изменяем цвет текста при выборе */
+} 
+
+.dd {
+    color: white;
+    margin-left: auto; /* Для закрепления цены справа */
+    color: #7E8492;
+    font-size: 24px;
+    font-weight: medium;
+  }
+
+#total {
+    color:white;
+    font-size: 26px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.filter {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#search{
+height: 2rem;
+width: 50%;
+border-radius: 5em;
+border: 0;
+margin-top: 1em;
+margin-bottom: 0.5em;
+padding-left: 0.7em;
+font-size: 20px;
+background-color: #53536f;
+}
+
+#search:focus {
+border: 0;
+}
+.sort-container {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: white;
+}
+.sort-container label {
+    margin-right: 10px;
+}
+#minPrice{
+    height: 2rem;
+    width: 20%;
+    border-radius: 5em;
+    border: 0;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    padding-left: 0.7em;
+    font-size: 20px;
+    background-color: #53536f;
+}
+#maxPrice{
+    height: 2rem;
+width: 20%;
+border-radius: 5em;
+border: 0;
+margin-top: 1em;
+margin-bottom: 0.5em;
+padding-left: 0.7em;
+font-size: 20px;
+background-color: #53536f;
+}
+#sortOptions{
+    height: 2rem;
+    width: 27%;
+    border-radius: 5em;
+    border: 0;
+    font-size: 20px;
+    color: gray;
+    background-color: #53536f;
+}
+#peopleCount{
+    height: 2rem;
+    width: 50%;
+    border-radius: 5em;
+    border: 0;
+    font-size: 20px;
+    color: black;
+    background-color: #53536f;
+}
+.kol{
+padding-top: 10px;
+font-size: 24px;
+max-width: 43rem;
+color: white;
+}
+
+
+.btnn {
+    margin-top: 10px;
+    display: inline;
+    padding: 16px 32px;
+    font-size: 20px;
+    color: #000;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+
+
+}
+
+.btnn:hover {
+    background-color: #53536f;
+    color: #000;
+}
+
+
+
+
+@media (max-width: 376px){
+    
+.calcul{
+    font-family: Arial, sans-serif;
+    margin: 0px;
+    padding: 30px 10px 30px 10px;
+       background-color: #1e1e2f;
+}
+.calcul h2{
+    text-align: center;
+    font-size: 28px;
+    color: white;
+    margin: 0;
+    }
+    .calcul p{
+        padding-top: 10px;
+        padding-bottom: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    margin: 0;
+    }
+    
+.item {
+    flex: 1;
+    font-size: 16px;
+        background: #1e1e2f;
+        color: white;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s;
+    }
+
+    #total {
+        color:white;
+        font-size: 22px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    .filter {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    
+    #search{
+    height: 2rem;
+    width: 95%;
+    border-radius: 5em;
+    border: 0;
+    margin-top: 0em;
+    margin-bottom: 0.5em;
+
+    font-size: 16px;
+    background-color: #53536f;
+    }
+    
+    #search:focus {
+    border: 0;
+    }
+    .sort-container {
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: white;
+    }
+    .sort-container label {
+        margin-right: 10px;
+    }
+    #minPrice{
+        height: 2rem;
+        width: 45%;
+        border-radius: 5em;
+        border: 0;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        padding-left: 0.7em;
+        font-size: 16px;
+        background-color: #53536f;
+    }
+    #maxPrice{
+        height: 2rem;
+    width: 45%;
+    border-radius: 5em;
+    border: 0;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    padding-left: 0.7em;
+    font-size: 16px;
+    background-color: #53536f;
+    }
+    #sortOptions{
+        height: 2rem;
+        width: 69%;
+        border-radius: 5em;
+        border: 0;
+        font-size: 16px;
+        color: gray;
+        background-color: #53536f;
+    }
+    #peopleCount{
+        height: 2rem;
+        width: 39%;
+        border-radius: 5em;
+        border: 0;
+        font-size: 16px;
+        color: black;
+        background-color: #53536f;
+    }
+    .kol{
+    padding-top: 10px;
+    font-size: 16px;
+    max-width: 60rem;
+    color: white;
+    }
+  
+    .dd{
+        font-size: 16px;;
+    
+    }
+    .btnn {
+        margin-top: 10px;
+        display: inline;
+        padding: 8px 16px;
+        font-size: 16px;
+        color: #000;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 100px;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    
+    
+    }
+    
+    .btnn:hover {
+        background-color: #53536f;
+        color: #000;
+    }
+    
 }

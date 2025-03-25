@@ -20,7 +20,6 @@
             <a href="contact.html">Контакты</a>
         </nav>
 
-        <!-- Бургер-меню -->
         <div class="hamburger-menu">
             <input id="menu__toggle" type="checkbox" >
             <label class="menu__btn" for="menu__toggle">
@@ -143,6 +142,277 @@
         </div>
     </section>
 
+
+<section class="calcul">
+
+<h2>Создайте тариф</h2>
+<p>Выбери то – что нужно именно тебе!</p>
+<div class="filter">
+    <input type="text" id="search" placeholder="Поиск...">
+     <input type="number" id="minPrice" placeholder="Мин. цена">
+     <input type="number" id="maxPrice" placeholder="Макс. цена">
+       <!-- <button id="filterBtn">Фильтровать</button>-->
+</div>
+
+<div class="sort-container">
+    <label for="sortOptions">Сортировка:</label>
+    <select id="sortOptions">
+        <option value="default">По умолчанию</option>
+        <option value="priceAsc">По возрастанию цены</option>
+        <option value="priceDesc">По убыванию цены</option>
+        <option value="nameAsc">По алфавиту A-Z</option>
+        <option value="nameDesc">По алфавиту Z-A</option>
+    </select>
+</div><div id="itemList">
+    <div class="item">
+        <label class="item-label"><input type="checkbox" data-price="100"> Неограниченная загрузка</label>
+        <div class="dd">100 byn</div>
+    </div>
+    <div class="item">
+        <label class="item-label"><input type="checkbox" data-price="200"> Расширенная статистика</label>
+        <div class="dd">200 byn</div>
+    </div>
+    <div class="item">
+        <label class="item-label"><input type="checkbox" data-price="150"> Эмблема профиля</label>
+        <div class="dd">150 byn</div>
+    </div>
+    <div class="item">
+        <label class="item-label"><input type="checkbox" data-price="250"> Доступ к сообществу</label>
+        <div class="dd">250 byn</div>
+    </div>
+    <div class="item">
+        <label class="item-label"><input type="checkbox" data-price="250"> Список ресурсов</label>
+        <div class="dd">250 byn</div>
+    </div>
+    <div class="item">
+        <label class="item-label"><input type="checkbox" data-price="250"> Настройка вашего профиля</label>
+        <div class="dd">250 byn</div>
+    </div>
+    <div class="item">
+        <label class="item-label"><input type="checkbox" data-price="250"> Демонстрация мастер–классов</label>
+        <div class="dd">250 byn</div>
+    </div>
+</div>
+
+<div class="kol">
+    <label for="peopleCount">Количество пользователей:</label>
+    <input type="number" id="peopleCount" value="1" min="1">
+</div>
+<div id="total">Итого к оплате: 0 byn</div>
+<div id="orderButtons" style="display: inline;">
+    <button id="placeOrder" class="btnn">Оформить заказ</button>
+    <button id="cancelOrder" class="btnn">Отменить</button>
+</div>
+
+</section>
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const totalDisplay = document.getElementById('total');
+    const searchInput = document.getElementById('search');
+    const itemList = document.getElementById('itemList');
+    const items = document.querySelectorAll('.item-label');
+    const peopleCountInput = document.getElementById('peopleCount');
+    const errorMessage = document.createElement('div');
+    errorMessage.style.color = 'red';
+    errorMessage.style.marginTop = '10px';
+    peopleCountInput.parentElement.appendChild(errorMessage);
+    
+    const sortOptions = document.getElementById('sortOptions');
+    const minPriceInput = document.getElementById('minPrice');
+    const maxPriceInput = document.getElementById('maxPrice');
+    
+    // Error messages for price inputs
+    const minPriceError = document.createElement('div');
+    minPriceError.style.color = 'red';
+    minPriceError.style.marginTop = '10px';
+    minPriceInput.parentElement.appendChild(minPriceError);
+    
+    const maxPriceError = document.createElement('div');
+    maxPriceError.style.color = 'red';
+    maxPriceError.style.marginTop = '10px';
+    maxPriceInput.parentElement.appendChild(maxPriceError);
+    // Функция для запрета ввода символа "+"
+function preventPlusInput(event) {
+    if (event.inputType === 'insertText' && event.data === '+') {
+        event.target.value = event.target.value.replace(/\+/g, '');
+    }
+}
+
+// Применяем ко всем нужным инпутам
+document.querySelectorAll('input[type="text"], input[type="number"]').forEach(input => {
+    input.addEventListener('input', preventPlusInput);
+});
+
+    items.forEach(item => {
+        item.addEventListener('click', function() {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked; // Toggle checkbox state
+            this.parentElement.classList.toggle('selected', checkbox.checked); // Highlight element
+            updateTotal(); // Update total
+        });
+    });
+    
+    function updateTotal() {
+        let total = 0;
+        const peopleCount = parseInt(peopleCountInput.value) || 1;
+        document.querySelectorAll('.item input[type="checkbox"]:checked').forEach(checkbox => {
+            total += parseInt(checkbox.dataset.price);
+        });
+        totalDisplay.textContent = `Итого: ${total * peopleCount} byn`;
+    }
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateTotal);
+    });
+    
+    function filterItems() {
+        const filter = searchInput.value.toLowerCase();
+        const minPrice = parseInt(minPriceInput.value) || 0;
+        const maxPrice = parseInt(maxPriceInput.value) || Infinity;
+    
+        document.querySelectorAll('.item').forEach(item => {
+            const text = item.textContent.toLowerCase();
+            const price = parseInt(item.querySelector('input').dataset.price);
+            const isVisible = text.includes(filter) && price >= minPrice && price <= maxPrice;
+            item.style.display = isVisible ? '' : 'none';
+        });
+    }
+    
+    searchInput.addEventListener('input', filterItems);
+    
+    // Validation for price inputs
+   minPriceInput.addEventListener('input', function() {
+       const minPriceValue = parseInt(this.value);
+       if (minPriceValue < 0) {
+           minPriceError.textContent = "Минимальная цена не может быть отрицательной.";
+          this.value = '';
+       } else {
+            minPriceError.textContent = '';
+        }
+        validatePriceRange();
+     filterItems(); // Update filter after validation
+    });
+    
+    maxPriceInput.addEventListener('input', function() {
+       const maxPriceValue = parseInt(this.value);
+      if (maxPriceValue < 0) {
+         //   maxPriceError.textContent = "Максимальная цена не может быть отрицательной.";
+            this.value = '';
+       } else {
+            maxPriceError.textContent = '';
+        }
+        validatePriceRange();
+        filterItems(); // Update filter after validation
+    });
+    
+    function validatePriceRange() {
+        const minPriceValue = parseInt(minPriceInput.value) || 0;
+        const maxPriceValue = parseInt(maxPriceInput.value) || Infinity;
+    
+        if (minPriceValue > maxPriceValue) {
+            minPriceError.textContent = "Минимальная цена не может быть больше максимальной.";
+            maxPriceError.textContent = '';
+        } else {
+            minPriceError.textContent = '';
+        }
+    }
+    
+    // Sort options
+    sortOptions.addEventListener('change', function() {
+        const itemsArray = Array.from(itemList.querySelectorAll('.item'));
+        if (this.value === 'priceAsc') {
+            itemsArray.sort((a, b) => a.querySelector('input').dataset.price - b.querySelector('input').dataset.price);
+        } else if (this.value === 'priceDesc') {
+            itemsArray.sort((a, b) => b.querySelector('input').dataset.price - a.querySelector('input').dataset.price);
+        } else if (this.value === 'nameAsc') {
+            itemsArray.sort((a, b) => a.textContent.localeCompare(b.textContent));
+        } else if (this.value === 'nameDesc') {
+            itemsArray.sort((a, b) => b.textContent.localeCompare(a.textContent));
+        }
+        itemList.innerHTML = '';
+        itemsArray.forEach(item => itemList.appendChild(item));
+    });
+    
+    // Validation for people count
+    peopleCountInput.addEventListener('input', function() {
+        const value = parseInt(this.value);
+        if (value < 1 || value > 1000000) {
+            errorMessage.textContent = "Пожалуйста, введите число от 1 до 1,000,000.";
+            this.value = ''; // Clear the input
+        } else {
+            errorMessage.textContent = ''; // Clear the error message
+        }
+        updateTotal(); // Update total after validation
+    });
+    
+    const orderButtons = document.getElementById('orderButtons');
+const placeOrderButton = document.getElementById('placeOrder');
+const cancelOrderButton = document.getElementById('cancelOrder');
+
+// Function to update the display of the order buttons
+function updateOrderButtons() {
+    const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+    const peopleCount = parseInt(peopleCountInput.value);
+    
+    orderButtons.style.display = (anyChecked || peopleCount > 0) ? 'block' : 'none';
+}
+
+// Update order buttons initially
+updateOrderButtons();
+
+// Add event listener to checkboxes and people count
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        updateTotal();
+        updateOrderButtons();
+    });
+});
+
+peopleCountInput.addEventListener('input', function() {
+    updateTotal();
+    updateOrderButtons();
+});
+
+// Place Order button functionality (for now, just an alert)
+placeOrderButton.addEventListener('click', function() {
+    alert('Заказ оформлен!');
+});
+cancelOrderButton.addEventListener('click', function() {
+    // Убираем выделение цвета
+    document.querySelectorAll('.item').forEach(item => {
+        item.classList.remove('selected');
+    });
+
+    // Снимаем все чекбоксы
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false; 
+        checkbox.dispatchEvent(new Event('change')); 
+    });
+
+    // Сбрасываем количество людей
+    peopleCountInput.value = 1;
+    errorMessage.textContent = ''; 
+
+    // Сбрасываем минимальную и максимальную цену
+    minPriceInput.value = '';
+    maxPriceInput.value = '';
+
+    // Очищаем сообщения об ошибках
+    minPriceError.textContent = '';
+    maxPriceError.textContent = '';
+
+    // Прячем кнопки
+    orderButtons.style.display = 'none';
+
+    // Обновляем итоговую сумму
+    updateTotal();
+});
+
+
+// Initial total update
+updateTotal();
+    </script>
+
     <section class="quate">
         <div class="faq">
             <h2>Часто задаваемые вопросы</h2>
@@ -205,6 +475,8 @@
             <p>© Copyright 2023 All Rights Reserved</p>
         </div>
     </footer>
+
 </body>
 
 </html>
+
