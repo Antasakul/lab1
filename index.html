@@ -42,15 +42,61 @@
             <h1>Цифровые креативные<br> решения</h1>
             <p class="pp">Когда дело доходит до интерактивного<br> маркетинга, мы вам поможем.<br> Будьте там, где
                 движется мир.</p>
-            <input type="email" placeholder="Введите адрес электронной почты">
-            <button>Попробуйте бесплатно</button>
+                <div id="emailError" style="color: red; margin-top: 5px;"></div>
+                <input type="email" id="emailInput" placeholder="Введите адрес электронной почты">
+          
+            <button id="submitButton">Попробуйте бесплатно</button>
         </div>
         <div class="hero-image-container">
             <img src="./assets/images/home1.png" alt="Описание изображения" class="hero-image">
 
         </div>
     </section>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const emailInput = document.getElementById('emailInput');
+            const emailError = document.getElementById('emailError');
+            const submitButton = document.getElementById('submitButton');
+    
+            // Функция проверки email
+            function validateEmail(email) {
+                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                return emailPattern.test(email);
+            }
+    
+            // Ограничение ввода
+            emailInput.addEventListener('input', function () {
+                this.value = this.value.replace(/\s/g, ''); // Убираем пробелы
+                
+                if (this.value.length > 50) {
+                    this.value = this.value.slice(0, 50);
+                    emailError.textContent = "Максимальная длина email — 50 символов.";
+                } else {
+                    emailError.textContent = "";
+                }
+    
+                // Проверяем корректность email
+                if (!validateEmail(this.value) && this.value.length > 0) {
+                    emailError.textContent = "Введите корректный email (пример: example@mail.com)";
+                    submitButton.disabled = true;
+                } else {
+                    emailError.textContent = "";
+                    submitButton.disabled = false;
+                }
+            });
+    
+            // Очистка поля при отправке
+            submitButton.addEventListener('click', function () {
+                if (validateEmail(emailInput.value)) {
+                    alert("Email успешно отправлен!");
+                    emailInput.value = "";
+                    submitButton.disabled = true;
+                }
+            });
+        });
+    </script>
+    
+    
     <section class="features">
         <h2>Coca помогает клиентам справляться со сложными проблемами, используя данные, которые приносят больше пользы.
         </h2>

@@ -76,7 +76,7 @@
             <a href="mailto:hellosansbrothers@gmail.com">hellosansbrothers@gmail.com</a>
         </p>
         <form class="registration-form">
-            
+            <div id="error-message" style="color: red; margin-top: 0px; margin-bottom: 0px;"></div>
                 <div class="input-wrapper">
                     <label for="first-name">Имя</label>
                     <input type="text" id="first-name" placeholder="Имя" required>
@@ -90,9 +90,10 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" placeholder="you@company.com" required>
             </div>
+            
             <div class="input-wrapper">
                 <label for="phone">Телефон</label>
-                <input type="tel" id="phone" placeholder="+375 (555) 000-0000" required>
+                <input type="tel" id="phone" placeholder="+375 (55) 000-0000" required>
             </div>
             <div class="input-wrapper">
                 <label for="tariff">Выберите тариф</label>
@@ -113,6 +114,117 @@
         <img src="../assets/images/blog-form.jpg" alt="Фоновое изображение">
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const firstName = document.getElementById('first-name');
+        const lastName = document.getElementById('last-name');
+        const email = document.getElementById('email');
+        const phone = document.getElementById('phone');
+        const submitButton = document.querySelector('button[type="submit"]');
+        const errorMessage = document.getElementById('error-message');
+        const comment = document.getElementById('comment');
+
+        // Удаление пробелов и ограничение длины для имени и фамилии
+        function validateTextInput(input) {
+            input.value = input.value.replace(/\s/g, '').replace(/[^a-zA-Zа-яА-ЯёЁ-]/g, '');
+            if (input.value.length > 20) {
+                input.value = input.value.slice(0, 20);
+            }
+        }
+
+        firstName.addEventListener('input', function () { validateTextInput(this); });
+        lastName.addEventListener('input', function () { validateTextInput(this); });
+
+        // Проверка email
+        function validateEmail(emailValue) {
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailPattern.test(emailValue);
+        }
+
+        email.addEventListener('input', function () {
+            this.value = this.value.replace(/\s/g, ''); // Убираем пробелы
+            if (!validateEmail(this.value) && this.value.length > 0) {
+                errorMessage.textContent = "Введите корректный email (пример: example@mail.com)";
+                submitButton.disabled = true;
+            } else {
+                errorMessage.textContent = "";
+                checkFormValidity();
+            }
+        });
+
+        phone.addEventListener('input', function () {
+            let numbers = this.value.replace(/\D/g, '');
+            if (!numbers.startsWith('375')) {
+                numbers = '375' + numbers;
+            }
+            numbers = numbers.slice(0, 12);
+            
+            let formatted = `+${numbers.slice(0, 3)}`;
+            if (numbers.length > 3) formatted += ` (${numbers.slice(3, 5)}`;
+            if (numbers.length > 5) formatted += `) ${numbers.slice(5, 8)}`;
+            if (numbers.length > 8) formatted += `-${numbers.slice(8, 10)}`;
+            if (numbers.length > 10) formatted += `-${numbers.slice(10, 12)}`;
+            
+            this.value = formatted;
+            
+            const phoneError = document.createElement("div");
+            phoneError.style.color = "red";
+            phoneError.style.marginTop = "0px";
+            phoneError.style.marginBottom="0px";
+            phoneError.id = "phone-error";
+            
+            if (numbers.length < 12) {
+                phoneError.textContent = "Введите полный номер телефона!";
+                if (!document.getElementById("phone-error")) {
+                    this.parentNode.appendChild(phoneError);
+                }
+                submitButton.disabled = true;
+            } else {
+                if (document.getElementById("phone-error")) {
+                    document.getElementById("phone-error").remove();
+                }
+                checkFormValidity();
+            }
+        });
+
+        //проверка комментария
+        comment.addEventListener('input', function () {
+            this.value = this.value
+                .replace(/^\s+/, '') // Убираем пробелы в начале
+                .replace(/\s{2,}/g, ' '); // Заменяем два и более пробела на один
+
+            if (this.value.length > 200) {
+                this.value = this.value.slice(0, 200);
+            }
+        });
+    
+        function checkFormValidity() {
+            const isNameValid = firstName.value.trim().length > 0;
+            const isLastNameValid = lastName.value.trim().length > 0;
+            const isEmailValid = validateEmail(email.value);
+          //  const isPhoneValid = phone.value.replace(/\D/g, '').length === 12; // Проверка: есть ли 12 цифр
+           // return isNameValid && isLastNameValid && isEmailValid && isPhoneValid;
+
+            // Если одно из полей не заполнено, кнопка неактивна
+            submitButton.disabled = !(isNameValid && isLastNameValid && isEmailValid);
+        }
+    // Обработчик отправки формы
+    document.getElementById("form").addEventListener('submit', function(event) {
+            event.preventDefault();  // Остановить отправку формы
+
+            if (!checkFormValidity()) {
+                // Если форма невалидна
+                errorMessage.textContent = "Пожалуйста, заполните все обязательные поля!";
+            } else {
+                // Если все обязательные поля заполнены
+                errorMessage.textContent = "";
+                alert("Форма успешно отправлена!");
+                this.reset();  // Сброс формы
+                
+            }
+        });
+    });
+</script>
 
 <footer>
 
