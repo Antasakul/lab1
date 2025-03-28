@@ -418,7 +418,8 @@ placeOrderButton.addEventListener('click', function() {
     alert('Заказ оформлен!');
 
     // Выполняем те же действия, что и при отмене заказа
-    cancelOrderButton.click();
+   // cancelOrderButton.click();
+  location.reload(); // Полностью обновляет страницу
 });
 cancelOrderButton.addEventListener('click', function() {
     // Убираем выделение цвета
