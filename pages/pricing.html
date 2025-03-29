@@ -236,7 +236,7 @@ maxPriceInput.parentElement.appendChild(maxPriceError);
 
 // Запрет ввода "+" и "-" и "e"
 function preventInvalidInput(event) {
-    if (event.key === 'e' || event.key === '+' || event.key === '-') {
+    if (event.key === 'e' || event.key === '+' || event.key === '-' || event.key === '.' || event.key === ',') {
         event.preventDefault();
     }
 }
@@ -313,8 +313,8 @@ function validatePriceRange() {
     const minPriceValue = parseInt(minPriceInput.value) || 0;
     const maxPriceValue = parseInt(maxPriceInput.value) || Infinity;
 
-    if (minPriceValue > maxPriceValue) {
-        minPriceError.textContent = "Минимальная цена не может быть больше максимальной.";
+    if (minPriceValue >= maxPriceValue) {
+        minPriceError.textContent = "Минимальная цена не может быть больше или равна максимальной.";
         maxPriceError.textContent = " ";
     } else {
         minPriceError.textContent = '';
